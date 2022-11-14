@@ -4,10 +4,15 @@ module.exports = {
    entry: './src/index.js',
    output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, './dist')
+      path: path.resolve(__dirname, './dist'),
+      clean: true
    },
    mode: 'none',
    plugins: [
-      new HtmlWebpackPlugin(),
+      new HtmlWebpackPlugin({
+         template: './index.html',
+         filename: 'app.html',
+         inject: 'body'
+      }),
    ],
 }
