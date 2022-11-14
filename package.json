@@ -1,0 +1,27 @@
+{
+  "name": "webpackTest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "detail": "webpack --stats detailed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wujunhong2000/webpackTest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wujunhong2000/webpackTest/issues"
+  },
+  "homepage": "https://github.com/wujunhong2000/webpackTest#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
