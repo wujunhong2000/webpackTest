@@ -1,5 +1,7 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerWebpackPlugin = require("css-minimizer-webpack-plugin");
 module.exports = {
    entry: './src/index.js',
    output: {
@@ -9,7 +11,8 @@ module.exports = {
       // ext 拓展名  
       assetModuleFilename: 'image/[contenthash][ext]'
    },
-   mode: 'development',
+   // mode: 'development',
+   mode: 'production', // 使用CssMinimizerWebpackPlugin时mode改为production
    // 代码调试（源码为原文件非打包后的文件）
    devtool: 'inline-source-map',
    plugins: [
@@ -18,6 +21,11 @@ module.exports = {
          filename: 'app.html',
          inject: 'body'
       }),
+      // mini-css-extract-plugin（基于webpack5）
+      // 本插件会将 CSS 提取到单独的文件中，为每个包含 CSS 的 JS 文件创建一个 CSS 文件，并且支持 CSS 和 SourceMaps 的按需加载。
+      new MiniCssExtractPlugin({
+         filename: 'style/[contenthash].css',
+      })
    ],
    module: {
       rules: [
@@ -54,6 +62,34 @@ module.exports = {
             }
          }
        },
+       {
+         //  需要被转化的文件后缀
+         test: /\.(css|less)$/,
+         // 使用的转化loader
+         // 逆序调用，'css-loader' -> 'style-loader'
+         // use: ['style-loader', 'css-loader', 'less-loader'],
+         use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+       },
+       {
+         //  加载文字资源
+         test: /\.(woff|woff2|eot|ttf|otf)$/,
+         type: 'asset/resource',
+       },
+       {
+         test: /\.(csv|tsv)$/i,
+         use: ['csv-loader'],
+       },
+       {
+         test: /\.xml$/i,
+         use: ['xml-loader'],
+       },
       ],
     },
+    optimization: {
+      //  这个插件使用 cssnano 优化和压缩 CSS。
+      // 就像 optimize-css-assets-webpack-plugin 一样，但在 source maps 和 assets 中使用查询字符串会更加准确，支持缓存和并发模式下运行。
+       minimizer: [
+          new CssMinimizerWebpackPlugin(),
+       ]
+    }
 }

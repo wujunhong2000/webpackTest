@@ -1,0 +1,16 @@
+/* css3定义字体 */
+@font-face {
+  font-family: 'AaYuanHeiTi';
+  src: url("./assets/AaYuanHeiTi.ttf") format('format');
+}
+.AaYuanHeiTiFont{
+   font-family: 'AaYuanHeiTi';
+   font-size: 30px;
+}
+.wrap {
+  color: aquamarine;
+}
+.block-bg {
+  /* 加载image */
+  background-image: url("./assets/edit.svg") !important;
+}
