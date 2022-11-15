@@ -62,6 +62,7 @@ module.exports = {
             }
          }
        },
+      // 通过loader可以然webpack处理其他类型的文件，并转换为有效的模块 
        {
          //  需要被转化的文件后缀
          test: /\.(css|less)$/,
