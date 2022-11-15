@@ -6,8 +6,27 @@ module.exports = {
    // entry: './src/index.js',
    entry: {
       // 如果不同的入口文件中引用了相同的包，会打包到各自的chunk中，不能共享
+      // index: './src/index.js',
+      // another: './src/another-module.js',
+
+      // 避免重复依赖的方式1
+      // index: {
+      //    import: './src/index.js',
+      //    dependOn: 'shared',
+      // },
+      // another: {
+      //    import: './src/another-module.js',
+      //    dependOn: 'shared',
+      // },
+      // shared: 'lodash',
+
+      // 避免重复依赖的方式2
+      // index: './src/index.js',
+      // another: './src/another-module.js',
+
+      // 避免重复依赖的方式3
       index: './src/index.js',
-      another: './src/another-module.js',
+
    },
    output: {
       filename: '[name].bundle.js',
@@ -107,6 +126,11 @@ module.exports = {
       // 就像 optimize-css-assets-webpack-plugin 一样，但在 source maps 和 assets 中使用查询字符串会更加准确，支持缓存和并发模式下运行。
        minimizer: [
           new CssMinimizerWebpackPlugin(),
-       ]
+       ],
+      //  避免重复依赖的方式2
+      //  splitChunks: {
+      //    chunks: 'all',
+      //  },
+
     }
 }
