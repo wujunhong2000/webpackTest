@@ -3,9 +3,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerWebpackPlugin = require("css-minimizer-webpack-plugin");
 module.exports = {
-   entry: './src/index.js',
+   // entry: './src/index.js',
+   entry: {
+      // 如果不同的入口文件中引用了相同的包，会打包到各自的chunk中，不能共享
+      index: './src/index.js',
+      another: './src/another-module.js',
+   },
    output: {
-      filename: 'bundle.js',
+      filename: '[name].bundle.js',
       path: path.resolve(__dirname, './dist'),
       clean: true, 
       // ext 拓展名  

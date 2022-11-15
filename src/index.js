@@ -7,6 +7,8 @@ import './style.css'
 import './style.less'
 import Data from './assets/data.xml'
 import Notes from './assets/data.csv'
+import _ from 'lodash';
+
 
 helloWorld();
 const img = document.createElement('img');
@@ -38,3 +40,5 @@ document.body.appendChild(spanWrap);
 // csv转换成array
 console.log(Data);
 console.log(Notes);
+
+console.log(_.join(['123', '456', '789'], ' '));
