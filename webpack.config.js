@@ -157,8 +157,9 @@ module.exports = (env) => {
       },
     },
     performance: {
-      maxEntrypointSize: 4000000000, // 此选项根据单个资源体积(单位: bytes)，控制 webpack 何时生成性能提示。
-      maxAssetSize: 1000000000, // 此选项根据入口起点的最大体积，控制 webpack 何时生成性能提示。
+      hints: false,
+      // maxEntrypointSize: 4000000000, // 此选项根据单个资源体积(单位: bytes)，控制 webpack 何时生成性能提示。
+      // maxAssetSize: 1000000000, // 此选项根据入口起点的最大体积，控制 webpack 何时生成性能提示。
     },
   };
 };
