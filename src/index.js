@@ -42,3 +42,15 @@ console.log(Data);
 console.log(Notes);
 
 console.log(_.join(['123', '456', '789'], ' '));
+
+// 懒加载
+const buttonWrap = document.createElement('button');
+buttonWrap.textContent = '点击执行加法运算';
+buttonWrap.addEventListener('click', () => {
+   // prefetch（预获取）将来某些导航下可能需要的资源 （当前页面的内容都加载完毕后，在网络空闲的时候再加载）
+   // preload（预加载）当前导航下可能需要的资源
+   import(/* webpackChunkName: 'math', webpackPrefetch: true */'./math.js').then(({ add, minus }) => {
+      console.log(add(1, 2));
+   })
+})
+document.body.appendChild(buttonWrap);
