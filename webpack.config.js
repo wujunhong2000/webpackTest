@@ -29,7 +29,8 @@ module.exports = {
     another: "./src/another-module.js",
   },
   output: {
-    filename: "[name].bundle.js",
+    // contenthash可以根据文件的内容生成哈希字符串（页面加载时根据文件名是否变化来判断是读取缓存还是重新加载）
+    filename: "scripts/[name].[contenthash].js",
     path: path.resolve(__dirname, "./dist"),
     clean: true,
     // ext 拓展名
@@ -134,11 +135,20 @@ module.exports = {
     minimizer: [new CssMinimizerWebpackPlugin()],
     //  避免重复依赖的方式2 （静态资源加载时打开）
     splitChunks: {
-      chunks: "all",
+      // chunks: "all",
+      
+      // 缓存第三方库
+      cacheGroups: {
+         vendor:{
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+         }
+      }
     },
   },
   performance: {
-   maxEntrypointSize: 4000000000, // 此选项根据单个资源体积(单位: bytes)，控制 webpack 何时生成性能提示。
-   maxAssetSize: 1000000000, // 此选项根据入口起点的最大体积，控制 webpack 何时生成性能提示。
- },
+    maxEntrypointSize: 4000000000, // 此选项根据单个资源体积(单位: bytes)，控制 webpack 何时生成性能提示。
+    maxAssetSize: 1000000000, // 此选项根据入口起点的最大体积，控制 webpack 何时生成性能提示。
+  },
 };
