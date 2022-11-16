@@ -26,7 +26,7 @@ module.exports = {
 
       // 避免重复依赖的方式3
       index: './src/index.js',
-
+      another: './src/another-module.js',
    },
    output: {
       filename: '[name].bundle.js',
@@ -127,10 +127,10 @@ module.exports = {
        minimizer: [
           new CssMinimizerWebpackPlugin(),
        ],
-      //  避免重复依赖的方式2
-      //  splitChunks: {
-      //    chunks: 'all',
-      //  },
+      //  避免重复依赖的方式2 （静态资源加载时打开）
+       splitChunks: {
+         chunks: 'all',
+       },
 
     }
 }
